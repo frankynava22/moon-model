@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Moon Model</title>
+    <link rel="stylesheet" href="../css/model.css">
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    
+<script>
+    let scene, camera, renderer, moon;
+
+    function init() {
+
+        scene = new THREE.Scene();
+
+        // Ambient light
+        const ambientLight = new THREE.AmbientLight(0x404040, 1); 
+        scene.add(ambientLight);
+
+        // Point light
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        const loader = new THREE.STLLoader();
+        loader.load('../graphics/moon_model.stl', function (geometry) {
+            const material = new THREE.MeshPhongMaterial({ color: 0x999999, specular: 0x111111, shininess: 200 });
+            moon = new THREE.Mesh(geometry, material);
+            moon.scale.set(0.5, 0.5, 0.5);
+            scene.add(moon);
+        });
+
+        camera.position.z = 5;
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement); // Enables control to rotate, zoom, pan
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        renderer.render(scene, camera);
+    }
+
+    init();
+    animate();
+</script>
+
+</body>
+
+</html>
