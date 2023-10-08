@@ -2,25 +2,92 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta charset="utf-8">
+
+    <meta content="The Moon" property="og:title">
     <title>The Moon</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
 </head>
 
-<body>
+<body style="zoom: 1;">
+    <div id="navbar">
+        <a href="html/model.html" class="btn from-top">The Moon</a>
+        <a href="#">About</a>
+        <a href="#">More</a>
+    </div>
 
-    <nav>
-        <a href="html/model.html"><button>The Moon</button></a>
-        <button>Button 2</button>
-        <button>Button 3</button>
-    </nav>
+    <div id="background">
+        <div class="star" data-parallaxify-range="300"></div>
+    </div>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="javascripts/jquery.parallaxify.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(document).ready(function() {
+                var i,
+                    size,
+                    color,
+                    width = $(window).width(),
+                    height = $(window).height();
 
-    <script>
-        // Add your JavaScript code here
-        console.log("3D Moon Model page loaded!");
+                for (i = 1; i <= 150; i++) {
+                    size = Math.ceil(3 * Math.random());
+                    $('#background').append('<div class="star" data-parallaxify-range="' + Math.round(100 * Math.random()) + '" style="top: ' + Math.round(height * Math.random()) + 'px; left: ' + Math.round(width * Math.random()) + 'px; width: ' + size + 'px; height: ' + size + 'px;"></div>');
+                }
+
+                for (i = 1; i <= 30; i++) {
+                    size = Math.ceil(5 * Math.random()) + 2;
+                    $('#background').append('<div class="star" data-parallaxify-range="' + Math.round(400 * Math.random()) + '" style="top: ' + Math.round(height * Math.random()) + 'px; left: ' + Math.round(width * Math.random()) + 'px; width: ' + size + 'px; height: ' + size + 'px;"></div>');
+                }
+
+                for (i = 1; i <= 15; i++) {
+                    size = Math.ceil(5 * Math.random()) + 5;
+                    color = 'rgba(' + Math.round(256 * Math.random()) + ', ' + Math.round(256 * Math.random()) + ', ' + Math.round(256 * Math.random()) + ', ' + (Math.round(100 * Math.random()) / 100) + ')';
+                    $('#background').append('<div class="star" data-parallaxify-range="' + Math.round(600 * Math.random()) + '" style="top: ' + Math.round(height * Math.random()) + 'px; left: ' + Math.round(width * Math.random()) + 'px; width: ' + size + 'px; height: ' + size + 'px; background: ' + color + '; box-shadow: 0px 0px 10px ' + color + ';"></div>');
+                }
+
+                $.parallaxify({
+                    positionProperty: 'transform',
+                    responsive: true,
+                    motionType: 'natural',
+                    mouseMotionType: 'gaussian',
+                    motionAngleX: 80,
+                    motionAngleY: 80,
+                    alphaFilter: 0.5,
+                    adjustBasePosition: true,
+                    alphaPosition: 0.025,
+                });
+
+                $('#foreground').click(function() {
+                    $('#info').animate({
+                        marginLeft: "-150px"
+                    }, 700);
+                });
+            });
+        }); // */
     </script>
-
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+            var pageTracker = _gat._getTracker("UA-41915731-1");
+            pageTracker._trackPageview();
+        } catch (err) {}
+    </script>
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 
 </html>

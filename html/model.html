@@ -9,55 +9,70 @@
 </head>
 
 <body>
+    <!-- Inserted the provided HTML here -->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    <div id="title">
+        
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/STLLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     
-<script>
-    let scene, camera, renderer, moon;
+    <script>
+        let scene, camera, renderer, moon;
 
-    function init() {
+        function init() {
 
-        scene = new THREE.Scene();
+            scene = new THREE.Scene();
 
-        // Ambient light
-        const ambientLight = new THREE.AmbientLight(0x404040, 1); 
-        scene.add(ambientLight);
+            // Ambient light
+            const ambientLight = new THREE.AmbientLight(0x404040, 1); 
+            scene.add(ambientLight);
 
-        // Point light
-        const pointLight = new THREE.PointLight(0xffffff, 1);
-        pointLight.position.set(5, 5, 5);
-        scene.add(pointLight);
+            // Point light
+            const pointLight = new THREE.PointLight(0xffffff, 1);
+            pointLight.position.set(5, 5, 5);
+            scene.add(pointLight);
 
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
 
-        renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+            const mtlLoader = new THREE.MTLLoader();
+            mtlLoader.load('../graphics/moon_model.mtl', function (materials) {
 
-        const loader = new THREE.STLLoader();
-        loader.load('../graphics/moon_model.stl', function (geometry) {
-            const material = new THREE.MeshPhongMaterial({ color: 0x999999, specular: 0x111111, shininess: 200 });
-            moon = new THREE.Mesh(geometry, material);
-            moon.scale.set(0.5, 0.5, 0.5);
-            scene.add(moon);
-        });
+                materials.preload();
 
-        camera.position.z = 5;
+                const objLoader = new THREE.OBJLoader();
+                objLoader.setMaterials(materials);
 
-        const controls = new THREE.OrbitControls(camera, renderer.domElement); // Enables control to rotate, zoom, pan
-    }
+                objLoader.load('../graphics/moon_model.obj', function (object) {
+                    moon = object;
+                    moon.scale.set(0.5, 0.5, 0.5);
+                    scene.add(moon);
+                });
 
-    function animate() {
-        requestAnimationFrame(animate);
-        renderer.render(scene, camera);
-    }
+            });
 
-    init();
-    animate();
-</script>
+            camera.position.z = 1;
 
+            const controls = new THREE.OrbitControls(camera, renderer.domElement); // Enables control to rotate, zoom, pan
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            renderer.render(scene, camera);
+        }
+
+        init();
+        animate();
+    </script>
 </body>
 
 </html>
