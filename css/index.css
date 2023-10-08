@@ -1,9 +1,10 @@
 @font-face {
-    font-family: 'AstroSpace';
-    src: url('../fonts/AstroSpace-eZ2Bg.ttf') format('truetype');
+    font-family: 'Avayx';
+    src: url('../fonts/Avayx-1yYv.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
 
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:600,300);
@@ -49,29 +50,39 @@ body {
 }
 
 #navbar {
-    font-family: 'AstroSpace', sans-serif;
+    font-family: 'Avayx';
     position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 50px;
+    top: 50%;                 /* Adjust for vertical centering */
+    left: 50%;                /* Adjust for horizontal centering */
+    transform: translate(-50%, -50%);  /* Adjust for perfect centering */
+    height: 150px;             /* Increase height */
     background-color: rgba(0,0,0,0.7);
     color: white;
+    flex-direction: column;
     z-index: 1000;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    justify-content: center;  /* Added for horizontal centering inside the navbar */
+    padding: 10px 40px;       /* Adjust padding */
 }
 
 #navbar a {
-    font-size: 20px;        /* Increase font size */
+    font-size: 70px;          
     color: white;
-    margin: 0 20px;        /* Increase margin to add more space between the buttons */
+    margin: 0;
     text-decoration: none;
 }
 
 #navbar a:hover {
-    text-decoration: underline;
+    text-decoration: none;  /* Changed from 'underline' to 'none' */
+}
+
+.explore-text {
+    font-family: 'Avayx', sans-serif;
+    font-size: 20px;         
+    color: white;
+    margin-top: 20px;         /* Add space between "The Moon" and "<Explore Moonquakes>" */
+    text-align: center;       /* Center the text */
 }
 
 

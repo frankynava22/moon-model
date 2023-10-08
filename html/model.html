@@ -9,12 +9,11 @@
 </head>
 
 <body>
-    <!-- Inserted the provided HTML here -->
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>
-    <div id="title">
-        
+    <div class="button-container">
+        <a href="../index.html" class="vertical-button">Home</a>
+        <button class="vertical-button">Button 2</button>
+        <button class="vertical-button">Button 3</button>
+        <!-- Add more buttons as needed -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
@@ -42,7 +41,11 @@
 
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
+            const oldCanvas = document.getElementById('moonRendererCanvas');
+            if (oldCanvas) oldCanvas.remove();
+            renderer.domElement.id = 'moonRendererCanvas';
             document.body.appendChild(renderer.domElement);
+
 
             const mtlLoader = new THREE.MTLLoader();
             mtlLoader.load('../graphics/moon_model.mtl', function (materials) {
@@ -62,7 +65,7 @@
 
             camera.position.z = 1;
 
-            const controls = new THREE.OrbitControls(camera, renderer.domElement); // Enables control to rotate, zoom, pan
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
         }
 
         function animate() {
