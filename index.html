@@ -88,6 +88,32 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
     </script>
+    <script >
+const csvFilePath = '/data/lognonne_2003_catalog.csv';
+
+fetch(csvFilePath)
+  .then(response => response.text())
+  .then(csvData => {
+    // Split the CSV data into rows
+    const rows = csvData.split('\n');
+
+    // Initialize an array to store the data
+    const dataArray = [];
+
+    // Loop through each row
+    rows.forEach(row => {
+      // Split the row into columns
+      const columns = row.split(',');
+
+      // Add the columns to the data array
+      dataArray.push(columns);
+    });
+
+    // Now, dataArray contains the CSV data as a 2D array
+    console.log(dataArray);
+  })
+  .catch(error => console.error('Error fetching the CSV file:', error));
+    </script>
 </body>
 
 </html>
