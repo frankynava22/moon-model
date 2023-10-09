@@ -10,11 +10,10 @@
 
 <body>
     <div class="button-container">
-        <a href="../index.html" class="vertical-button">Home</a>
         <a href="model.html" class="vertical-button">Reset</a>
-        <a href="topo.html" class="vertical-button">Topography</a>
+        <a href="#" class="vertical-button">Topography</a>
         <button class="vertical-button">Button 3</button>
-        
+        <!-- Add more buttons as needed -->
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
@@ -49,7 +48,7 @@
 
 
             const mtlLoader = new THREE.MTLLoader();
-            mtlLoader.load('../graphics/moon_model.mtl', function (materials) {
+            mtlLoader.load('../graphics/model_topo.mtl', function (materials) {
 
                 materials.preload();
 
